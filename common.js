@@ -101,7 +101,7 @@ $("#validateform").validate({
         "id" : "1",
         "desc": "table with chairs",
         "amount": "15500",
-        "url": "http://localhost/kido-teacher-store/images/1.jpg",
+        "url": "/images/1.jpg",
         "subcatigories" : {
 
         }
@@ -110,7 +110,7 @@ $("#validateform").validate({
         "id" : "2",
         "desc": "waterproof mattress",
         "amount": "4700",
-        "url": "http://localhost/kido-teacher-store/images/5.jpg",
+        "url": "/images/5.jpg",
         "subcatigories" : {
             
         }
@@ -119,7 +119,7 @@ $("#validateform").validate({
         "id" : "3",
         "desc": "selection of balls",
         "amount": "1770",
-        "url": "http://localhost/kido-teacher-store/images/3.jpg",
+        "url": "/images/3.jpg",
         "subcatigories" : {
             
         }
@@ -128,7 +128,7 @@ $("#validateform").validate({
         "id" : "4",
         "desc": "kitchen set toys",
         "amount": "1999",
-        "url": "http://localhost/kido-teacher-store/images/4.jpg",
+        "url": "/images/4.jpg",
         "subcatigories" : {
 
         }
@@ -137,7 +137,7 @@ $("#validateform").validate({
         "id" : "5",
         "desc": "word builder",
         "amount": "475",
-        "url": "http://localhost/kido-teacher-store/images/8.jpg",
+        "url": "/images/8.jpg",
         "subcatigories" : {
             
         }
@@ -146,7 +146,7 @@ $("#validateform").validate({
         "id" : "6",
         "desc": "maze chase missing letter",
         "amount": "575",
-        "url": "http://localhost/kido-teacher-store/images/7.jpg",
+        "url": "/images/7.jpg",
         "subcatigories" : {
             
         }
@@ -156,7 +156,7 @@ $("#validateform").validate({
         "id" : "7",
         "desc": "magnetic cutouts",
         "amount": "425",
-        "url": "http://localhost/kido-teacher-store/images/24.jpg",
+        "url": "/images/24.jpg",
         "subcatigories" : {
                 "cat1": "Capital ABC",
                 "cat2": "Lower abc",
@@ -167,7 +167,7 @@ $("#validateform").validate({
         "id" : "8",
         "desc": "graded tower",
         "amount": "475",
-        "url": "http://localhost/kido-teacher-store/images/26.jpg",
+        "url": "/images/26.jpg",
         "subcatigories" : {
             "cat1": "Graded circle Tower",
             "cat2": "Graded triangle Tower",
@@ -178,7 +178,7 @@ $("#validateform").validate({
         "id" : "9",
         "desc": "piece together",
         "amount": "475",
-        "url": "http://localhost/kido-teacher-store/images/27.jpg",
+        "url": "/images/27.jpg",
         "subcatigories" : {
             "cat1": "Piece Together - Rectangle",
             "cat2": "Piece Together - triangle"
