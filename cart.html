@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Kido-Teacher-Store</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <!-- header start -->
+    <header id="header-wrap">
+
+        <nav class="main-nav fixed-top py-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="logo-main">
+                            <a href="index.html">
+                                <img src="images/head-img.png" width="300">
+                            </a>
+                            <a href="cart.html" class="href"><div class="cart icon1">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                                <span class="text-white pl-3">&#8377; &nbsp;</span><span class="cart_amount text-white">0</span>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <!-- header end -->
+<section id="my-cart-desktop" class="cart-page py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="cart-main border shadow bg-white p-5">
+                    <div class="mb-3"><h2>My Cart</h2></div>
+                    <div class="row bg-primary border shadow p-2 text-center">
+                        <div class="col-lg-2 col-md-2"><p>Product</p></div>
+                        <div class="col-lg-3 col-md-3"><p>detail</p></div>
+                        <div class="col-lg-2 col-md-2"><p>quantity</p></div>
+                        <div class="col-lg-2 col-md-2"><p>price</p></div>
+                        <div class="col-lg-2 col-md-2"><p>total</p></div>
+                    </div>
+                    <div id="cart-list">
+                    <div class="cart-data row bg-white border shadow my-2 p-4 text-center d-flex align-items-center" >
+                       <!-- <div class="cart-data"> -->
+                        <div class="col-lg-2 col-md-2"><img src="images/1.jpg" width="100" class="product-img" alt="cart-img"></div>
+                        <div class="col-lg-3 col-md-3"><h4 class="product-title product-text">Table with chairs</h4></div>
+                        <div class="col-lg-2 col-md-2">
+                            <input type='button' value='-' class='qtyminus' field='quantity' />
+                            <input type='text' name='quantity' value='0' class='qty' />
+                            <input type='button' value='+' class='qtyplus' field='quantity' />
+                        </div>
+                        <div class="col-lg-2 col-md-2"><h4 class="product-price product-text">15500</h4></div>
+                        <div class="col-lg-2 col-md-2"><h4 class="product-text">&#8377; 15500</h4></div>
+                        <div class="col-lg-1 col-md-1"><a class="remove-item text-danger" title="remove item"><i class="fas fa-times-circle"></i></a></div>
+                        <!-- </div> -->
+                    </div>
+                    </div>
+
+                    <div class="row total-section justify-content-end py-4">
+
+                        <div class="col-sm-6 col-md-5 col-md-offset-2">
+                            <h2 class="pb-4">Order summery</h2>
+                            <div class="cart">
+                                <div class="cart-amount">
+                                    <table>
+                                        <tr>
+                                            <td><b>SUBTOTAL(<span class="total-count">0</span> ITEM):</b></td>
+                                            <td class="pl-3"><span>&#8377;</span><span id="sub_total" class="cart_amount"> 0</span></td>
+                                        </tr>
+
+                                        <tr class="total">
+                                            <td><b>TOTAL:</b></td>
+                                            <td class="pl-3"><span>&#8377;</span><span id="total" class="cart_amount"> 0</span></td>
+                                        </tr>
+
+                                        <tr class="grand-total">
+                                            <td><b>GRAND TOTAL:</b></td>
+                                            <td class="pl-3"><span>&#8377;</span><span id="grand_total" class="cart_amount"> 0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <a href="#" class="btn btn-primary btn-sm mt-4">Submit</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- for mobile view -->
+<section id="my-cart-mobile" class="cart-page py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="cart-data1 border shadow bg-white p-5">
+                    <h2 class="pb-4">My Cart</h2>
+                    <div id="cart-list-mobile">
+                    <div class="cart-mobile cart-data-mobile bg-white border shadow my-2 p-4">
+                     <div class="row">
+                         <div class="col-md-10">
+                            <div class="d-flex justify-content-between"><h5 class="cart-text">Product</h5><a href="#" class="remove-item-mobile text-danger" title="remove item"><i class="fas fa-times-circle"></i></a></div>
+                            <div class="text-center"><img src="images/1.jpg" class="product-img" width="200" alt="cart-img"></div>
+                         </div>
+                     </div>
+                     <div class="d-flex justify-content-around pt-2">
+                        <div class="">
+                           <h5 class="cart-text">detail</h5>
+                        </div>
+                        <div class="">
+                            <h4 class="product-title product-text">Table with chairs</h4>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around pt-2">
+                        <div class="">
+                           <h5 class="cart-text">quantity</h5>
+                        </div>
+                        <div class="">
+                            <input type='button' value='-' class='qtyminus' field='quantity' />
+                            <input type='text' name='quantity' value='0' class='qty' />
+                            <input type='button' value='+' class='qtyplus' field='quantity' />
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around pt-2">
+                        <div class="">
+                           <h5 class="cart-text">price</h5>
+                        </div>
+                        <div class="">
+                            <h4 class="product-price product-text">&#8377; 15500</h4>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-around pt-2">
+                        <div class="">
+                           <h5 class="cart-text">total</h5>
+                        </div>
+                        <div class="">
+                            <h4 class="product-text">&#8377; 15500</h4>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                        
+                    
+
+                    <div class="row total-section justify-content-end py-4">
+
+                        <div class="col-sm-6 col-md-5 col-md-offset-2">
+                            <h2 class="pb-4">Order summery</h2>
+                            <div class="cart">
+                                <div class="cart-amount">
+                                    <table>
+                                        <tr>
+                                            <td><b>SUBTOTAL(<span class="total-count">0</span> ITEM):</b></td>
+                                            <td class="pl-3"><span>&#8377;</span><span id="sub_total" class="cart_amount"> 0</span></td>
+                                        </tr>
+
+                                        <tr class="total">
+                                            <td><b>TOTAL:</b></td>
+                                            <td class="pl-3"><span>&#8377;</span><span id="total" class="cart_amount"> 0</span></td>
+                                        </tr>
+
+                                        <tr class="grand-total">
+                                            <td><b>GRAND TOTAL:</b></td>
+                                            <td class="pl-3"><span>&#8377;</span><span id="grand_total" class="cart_amount"> 0</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <a href="#" class="btn btn-primary btn-sm mt-4">Submit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+ <!-- footer start -->
+ <footer>
+
+</footer>
+<!-- footer end -->
+
+<button onclick="topFunction()" id="myBtn" title="Go to top" class="topbtn shadow px-3 py-2 rounded"><i class="fa fa-angle-up"></i></button>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
+<script src="https://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script src="https://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script src="common.js"></script>
+<script>
+
+
+// var getcart = local_get('cart');
+//     var getitem = getcart.map((item) => {
+//         // item.id,
+//         // item.img,
+//         // item.desc,
+//         // item.price,
+//         // item.quantity
+//         console.log(item);
+
+//     });
+
+    var item_card = $('.cart-data:first');
+    $('#cart-list').empty();
+    var getcart = local_get('cart');
+    // var getitem = getcart.map((k, v) => {
+        $.each(getcart, function (k, v) {
+        // console.log(getitem);
+        var itm_card  = item_card.clone();
+        itm_card.attr("item_id",v.id);
+        itm_card.find('.product-img').attr("src",v.img);
+        itm_card.find('.product-title').text(v.desc);
+        itm_card.find('.qty').val(v.quantity);
+        itm_card.find('.product-price').text(v.price);
+
+        $('#cart-list').append(itm_card);
+    });
+
+    var item_card = $('.cart-data-mobile:first');
+    $('#cart-list-mobile').empty();
+    var getcart = local_get('cart');
+    console.log(getcart);
+    // var getitem = getcart.map((k, v) => {
+        $.each(getcart, function (k, v) {
+        // console.log(getitem);
+        var itm_card  = item_card.clone();
+        itm_card.attr("item_id",v.id);
+        itm_card.find('.product-img').attr("src",v.img);
+        itm_card.find('.product-title').text(v.desc);
+        itm_card.find('.qty').val(v.quantity);
+        itm_card.find('.product-price').text(v.price);
+
+        $('#cart-list-mobile').append(itm_card);
+    });
+
+
+
+
+</script>
+</body>
+
+</html>

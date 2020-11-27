@@ -3,9 +3,9 @@ body{
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 60px;
     line-height: 1.5;
-    background-color: #f9f9f9;
+    background-color: #888;
 }
 h1,h2,h3,h4,h5,h6 {
     font-weight: 600;
@@ -15,12 +15,12 @@ h1,h2,h3,h4,h5,h6 {
     color: #000;
 }
 h1, .h1 {font-size: 1.75em;}
-h2, .h2 {font-size: 1.4em; color: #063268;}
+h2, .h2 {font-size: 1.3em; color: #063268;}
 h3, .h3 {font-size: 1.15em;}
 h4, .h4 {font-size: 1.1em;}
-h5, h6, .h5, .h6{font-size: 1em; }
+h5, h6, .h5, .h6{font-size: 1.2em; }
 
-p,li {color: #444; font-size: 1em;}
+p,li {color: #fff; font-size: 1.2em; text-transform: capitalize;}
 a {color: #444; text-decoration: none;  transition: 0.3s;}
 
 #myBtn {
@@ -55,10 +55,35 @@ a {color: #444; text-decoration: none;  transition: 0.3s;}
     background: #999;
     color: #000;
 } */
+.main-nav{
+    background-color: #063268;
+}
 
-.head-img1{
-    width : 100%;
-    height: 56%;
+.logo-main {
+    text-align: center;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon1 i {
+    font-size: 30px;
+    color: #fff;
+}
+
+.cart-count{
+    position: absolute;
+    top: 4px;
+    background: #7caae2;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    color: #063268;
+    text-align: center;
+    line-height: 26px;
+    right: 85px;
+    font-size: 16px;
 }
 
 .product-text{
@@ -89,9 +114,47 @@ input.qtyminus { width:25px; height:27px; background-color:#063268 ; color: #fff
     border: 1px solid #063268!important;
    }
    
+   .bg-primary {
+    background-color: #063268!important;
+}
+
+.cart-text{
+    font-size: 1.2em;
+    text-transform: capitalize;
+}
+
+
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #my-cart-mobile{display: none;}  
+} 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    #my-cart-mobile{display: none;}  
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    #my-cart-mobile{display: none;}  
+  }
 
 @media screen and (max-width: 600px){
-  
-
+   #my-cart-desktop{display: none;}
+   .cart-count {
+    position: absolute;
+    top: -2px;
+    background: #7caae2;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    color: #063268;
+    text-align: center;
+    line-height: 26px;
+    right: 40px;
+    font-size: 16px;
+}
    
 }
