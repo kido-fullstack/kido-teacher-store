@@ -91,13 +91,28 @@ a {color: #444; text-decoration: none;  transition: 0.3s;}
     text-transform: lowercase;
 }
 
+.product-title{
+    font-size: 0.9em;
+    text-transform: lowercase;
+}
+
+.product-price{
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.product-total{
+    font-size: 0.9em;
+    font-weight: bold; 
+}
+
 .qty {
     width: 40px;
     height: 26px;
     text-align: center;
 }
-input.qtyplus { width:25px; height:27px; background-color:#063268 ; color: #fff;}
-input.qtyminus { width:25px; height:27px; background-color:#063268 ; color: #fff;}
+input.qtyplus { width:25px; height:30px; background-color:#063268 ; color: #fff;}
+input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff;}
 
 
 .btn-primary {
@@ -110,36 +125,74 @@ input.qtyminus { width:25px; height:27px; background-color:#063268 ; color: #fff
     color: red;
   }
 
-  .highlight {
-    border: 1px solid #063268!important;
-   }
-   
-   .bg-primary {
-    background-color: #063268!important;
-}
 
 .cart-text{
     font-size: 1.2em;
     text-transform: capitalize;
 }
 
+#my-cart .cart-page table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#my-cart .cart-page table thead {
+    background-color: #063268;
+    height: 70px;
+}
+
+
+#my-cart .cart-page table tr {
+    padding: .35em;
+    border-bottom: 1px solid;
+    position: relative;
+}
+
+
+#my-cart .cart-page table thead th {
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 18px 0;
+    color: #fff;
+    font-weight: 600;
+    font-family: "Roboto",sans-serif;
+}
+
+#my-cart .cart-page table th, #my-cart .cart-page table td {
+    text-align: center;
+    border-radius: 0;
+}
+
+.cart-list {
+    margin-top : 10px ;
+}
 
 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    #my-cart-mobile{display: none;}  
+    .visible-xs {
+        display: none !important;
+    }
 } 
   
   /* Large devices (laptops/desktops, 992px and up) */
   @media only screen and (min-width: 992px) {
-    #my-cart-mobile{display: none;}  
+    .visible-xs {
+        display: none !important;
+    }
   } 
   
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
-    #my-cart-mobile{display: none;}  
+    .visible-xs {
+        display: none !important;
+    }
   }
+
 
 @media screen and (max-width: 600px){
    #my-cart-desktop{display: none;}
@@ -156,5 +209,41 @@ input.qtyminus { width:25px; height:27px; background-color:#063268 ; color: #fff
     right: 40px;
     font-size: 16px;
 }
-   
+.cart-text {
+    font-size: 0.9em;
+    text-transform: capitalize;
+    padding-right: 20px;
+}
+
+#my-cart .cart-page table thead {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+#my-cart .cart-page table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+#my-cart .cart-page table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 18px;
+    text-align: right;
+    padding: 20px;
+}
+
+.hidden-xs {
+    display: none !important;
+}
+
 }
