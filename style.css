@@ -198,7 +198,7 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
    #my-cart-desktop{display: none;}
    .cart-count {
     position: absolute;
-    top: -2px;
+    top: 3px;
     background: #7caae2;
     width: 25px;
     height: 25px;
@@ -206,7 +206,7 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     color: #063268;
     text-align: center;
     line-height: 26px;
-    right: 40px;
+    right: 78px;
     font-size: 16px;
 }
 .cart-text {
@@ -246,4 +246,21 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     display: none !important;
 }
 
+}
+
+
+@media screen and (min-width: 600px){
+    .cart-count {
+        position: absolute;
+        top: 3px;
+        background: #7caae2;
+        width: 25px;
+        height: 25px;
+        border-radius: 25px;
+        color: #063268;
+        text-align: center;
+        line-height: 26px;
+        right: 78px;
+        font-size: 16px;
+    }
 }

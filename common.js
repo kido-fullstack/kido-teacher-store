@@ -124,12 +124,14 @@ $("#validateform").validate({
       });
 
 
+    var path_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/" : "";
+
     var items  = [
     {
         "id" : "1",
         "desc": "table with chairs",
         "amount": "15500",
-        "url": "images/1.jpg",
+        "url": path_pre+"images/1.jpg",
         "subcatigories" : {
 
         }
