@@ -1,9 +1,9 @@
 
-//Get the button
-var mybutton = document.getElementById("myBtn");
 var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/apis/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
 var img_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/images/" : "https://kido-teacher-store.netlify.app/images/";
 
+//Get the button
+var mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
@@ -69,9 +69,15 @@ $(document).ready(function() {
               }
           });
 
+         
+
           if(!local_get('user')){
-            $('#exampleModal').modal('show');
-          }else{
+            $('#exampleModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            },'show');
+
+        }else{
             home_update();
             var user_auth = local_get('user');
             var logged_email = user_auth[0]["email"];
@@ -81,7 +87,8 @@ $(document).ready(function() {
 
           $(document).on('click','.logout',function(){
             localStorage.removeItem("user");
-            location.reload();
+            // location.reload();
+            window.location.replace("index.html");
           });
 
 
@@ -128,6 +135,7 @@ $(document).ready(function() {
     
         function home_update() {
             var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
+            console.log(all_items);
             var items = {};
             $.each(all_items, function (k, v) {
         
@@ -145,6 +153,7 @@ $(document).ready(function() {
                 itm_card.attr("item_id",v.id);
                 itm_card.find('.product-image').attr("src",img_pre+v.url);
                 itm_card.find('.product-text').text(v.desc);
+                itm_card.find('.product-desc').text(v.longdesc);
                 itm_card.find('.product-amount').text(v.amount);
         
                 if(Object.keys(v.subcatigories).length){
