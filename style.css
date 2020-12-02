@@ -241,6 +241,15 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
 
 @media screen and (max-width: 600px){
 
+    body{
+        font-size: 16px;
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+        padding-top: 150px;
+        line-height: 1.5;
+        background-color: #fff;
+    }
+
     header .fas span.cart-count {
     position: absolute;
     top: 74px;
@@ -253,6 +262,12 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     text-align: center;
     line-height: 26px;
     font-size: 16px;
+    }
+
+    .cart-main{
+        padding: 1rem!important;
+        box-shadow: 0!important;
+        border: 0px solid #dee2e6!important;
     }
     
 .cart-text {
