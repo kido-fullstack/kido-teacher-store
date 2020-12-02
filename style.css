@@ -72,9 +72,9 @@ a {color: #444; text-decoration: none;  transition: 0.3s;}
     color: #fff;
 }
 
-.cart-count{
+.cart-count {
     position: absolute;
-    top: 4px;
+    top: 2px;
     background: #7caae2;
     width: 25px;
     height: 25px;
@@ -82,8 +82,15 @@ a {color: #444; text-decoration: none;  transition: 0.3s;}
     color: #063268;
     text-align: center;
     line-height: 26px;
-    right: 85px;
+    right: 101px;
     font-size: 16px;
+}
+
+.nav-link{color: #fff!important; font-size: 0.8em; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 600;}
+.bg-color{background: #063268!important; }
+  
+.logout{
+    cursor: pointer;
 }
 
 .product-text{
@@ -170,6 +177,34 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     margin-top : 10px ;
 }
 
+.modal-header1 {
+    background-color: #063268;
+}
+
+.modal-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: center;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    border-bottom-right-radius: .3rem;
+    border-bottom-left-radius: .3rem;
+}
+
+#exampleModal{
+    background-color: #888;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    /* margin: .5rem; */
+    pointer-events: none;
+    top: 150px;
+}
 
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -177,8 +212,10 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     .visible-xs {
         display: none !important;
     }
-    .break{
-        display: none;
+    .navbar-collapse {
+        flex-basis: 0%;
+        flex-grow: 0;
+        align-items: center;
     }
 } 
   
@@ -187,8 +224,10 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     .visible-xs {
         display: none !important;
     }
-    .break{
-        display: none;
+    .navbar-collapse {
+        flex-basis: 100%;
+        flex-grow: 1;
+        align-items: center;
     }
   } 
   
@@ -197,17 +236,14 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     .visible-xs {
         display: none !important;
     }
-    .break{
-        display: none;
-    }
   }
 
 
 @media screen and (max-width: 600px){
-   #my-cart-desktop{display: none;}
+
    .cart-count {
     position: absolute;
-    top: -6px;
+    top: 78px;
     background: #7caae2;
     width: 25px;
     height: 25px;
@@ -215,7 +251,7 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     color: #063268;
     text-align: center;
     line-height: 26px;
-    right: 18px;
+    right: 30px;
     font-size: 16px;
 }
 .cart-text {
@@ -255,6 +291,19 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     display: none !important;
 }
 
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: .5rem;
+    pointer-events: none;
+    top: 200px;
+}
+
+.navbar-collapse {
+    flex-basis: 0%;
+    flex-grow: 1;
+    align-items: center;
+}
 
 }
 

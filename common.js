@@ -1,6 +1,9 @@
 
 //Get the button
 var mybutton = document.getElementById("myBtn");
+var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/apis/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
+var img_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/images/" : "https://kido-teacher-store.netlify.app/images/";
+
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
@@ -18,6 +21,239 @@ function topFunction() {
  document.body.scrollTop = 0;
  document.documentElement.scrollTop = 0;
 }
+
+//--------------------------------------FORM VALIDATION---------------------------------------   
+$(document).ready(function() {
+
+    $("#validateform").validate({
+              rules:{
+                fname:{
+                    required:true,
+                  },
+                  lname:{
+                    required:true,
+                  },
+                  emailadd: { 
+                      required:true,
+                      email: true 
+                   },
+                   mobile: { 
+                      required:true,
+                      digits: true,
+                    minlength: 10,
+                    maxlength: 10 
+                   },
+                  
+                     
+              },
+    
+              messages:{
+                fname:{
+                    required:"This field is required",
+                  },
+                  lname:{
+                    required:"This field is required",
+                  },
+                  emailadd: { 
+                  required: "This field is required",
+                  email: "Please enter a valid email id",
+                  },
+                  mobile: { 
+                  required: "This field is required",
+                  digits: "Please enter a valid mobile number",
+                  minlength: "Please enter 10 digits only",
+                  maxlength: "Please enter 10 digits only" 
+                  },
+                   
+    
+              }
+          });
+
+          if(!local_get('user')){
+            $('#exampleModal').modal('show');
+          }else{
+            home_update();
+            var user_auth = local_get('user');
+            var logged_email = user_auth[0]["email"];
+            $('.logged-user').text(logged_email);
+          }
+
+
+          $(document).on('click','.logout',function(){
+            localStorage.removeItem("user");
+            location.reload();
+          });
+
+
+          $(document).on('click','.btn-auth',function(){
+              var email_add = $('.mymail').val();
+              console.log(email_add);
+            // var user_auth =  JSON.parse(requester("http://localhost/apis/api.php","POST",{'api':'auth_user'}));
+            var user_auth =  JSON.parse(requester(server,"POST",{'api':'auth_user','filter':'{"email":"'+email_add+'","is_active":1}'}));
+            // console.log(user_auth);
+            if(user_auth.status){
+                local_set('user',user_auth.user);
+                var logged_email = user_auth.user[0]["email"];
+                $('.logged-user').text(logged_email);
+                $('#exampleModal').modal('hide');
+                home_update();
+            }else{
+                $("#notautherized").addClass("alert alert-danger").append(user_auth.msg);
+            }
+          });
+     
+
+          
+    
+//--------------------------------------API CONFIG---------------------------------------  
+
+          function requester(end_point, req_type, params) {
+            // var authToken = 'Bearer ' + local_get('access_token');
+            return $.ajax({
+                url: end_point,
+                // beforeSend: function(req) { req.setRequestHeader("Authorization", authToken); },
+                type: req_type,
+                async: false,
+                cache: false,
+                timeout: 3000,
+                data: params,
+                success: function(resp) {},
+                error: function(x,t,m){
+                    if(t==="timeout") {
+                        requester(end_point, req_type, params);
+                    }
+                }        
+            }).responseText;
+        }
+    
+        function home_update() {
+            var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
+            var items = {};
+            $.each(all_items, function (k, v) {
+        
+                items[v.id] == undefined ? items[v.id] = v : false;
+                items[v.id]['subcatigories'] == undefined ? items[v.id]['subcatigories'] = {} : false;
+                if(v.category_id != null){
+                    items[v.id]['subcatigories'][v.category_id] = v.name;
+                }
+            });
+
+            var item_card = $('.itm:first');
+            $('#item_list').empty();
+            $.each(items, function (k, v) {
+                var itm_card  = item_card.clone();
+                itm_card.attr("item_id",v.id);
+                itm_card.find('.product-image').attr("src",img_pre+v.url);
+                itm_card.find('.product-text').text(v.desc);
+                itm_card.find('.product-amount').text(v.amount);
+        
+                if(Object.keys(v.subcatigories).length){
+                    var opts = "";
+                    $.each(v.subcatigories, function (k1, v1) {
+                        opts += '<option sub_cat_id="'+k1+'" value="'+v1+'">'+v1+'</option>';
+                    });
+                    itm_card.find('.categ_sel').append(opts);
+                }else{
+                    itm_card.find('.categ_sel').remove();
+                }
+                $('#item_list').append(itm_card);
+            });
+        }
+    
+        // console.log(items);
+    
+    //     var path_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/" : "";
+    
+    //     var items  = [
+    //     {
+    //         "id" : "1",
+    //         "desc": "table with chairs",
+    //         "amount": "15500",
+    //         "url": path_pre+"images/1.jpg",
+    //         "subcatigories" : {
+    
+    //         }
+    //     },
+    //     {
+    //         "id" : "2",
+    //         "desc": "waterproof mattress",
+    //         "amount": "4700",
+    //         "url": "images/5.jpg",
+    //         "subcatigories" : {
+                
+    //         }
+    //     },
+    //     {
+    //         "id" : "3",
+    //         "desc": "selection of balls",
+    //         "amount": "1770",
+    //         "url": "images/3.jpg",
+    //         "subcatigories" : {
+                
+    //         }
+    //     },
+    //     {
+    //         "id" : "4",
+    //         "desc": "kitchen set toys",
+    //         "amount": "1999",
+    //         "url": "images/4.jpg",
+    //         "subcatigories" : {
+    
+    //         }
+    //     },
+    //     {
+    //         "id" : "5",
+    //         "desc": "word builder",
+    //         "amount": "475",
+    //         "url": "images/8.jpg",
+    //         "subcatigories" : {
+                
+    //         }
+    //     },
+    //     {
+    //         "id" : "6",
+    //         "desc": "maze chase missing letter",
+    //         "amount": "575",
+    //         "url": "images/7.jpg",
+    //         "subcatigories" : {
+                
+    //         }
+    //     },
+    
+    //     {
+    //         "id" : "7",
+    //         "desc": "magnetic cutouts",
+    //         "amount": "425",
+    //         "url": "images/24.jpg",
+    //         "subcatigories" : {
+    //                 "cat1": "Capital ABC",
+    //                 "cat2": "Lower abc",
+    //                 "cat3": "Cursive abc"
+    //         }
+    //     },
+    //     {
+    //         "id" : "8",
+    //         "desc": "graded tower",
+    //         "amount": "475",
+    //         "url": "images/26.jpg",
+    //         "subcatigories" : {
+    //             "cat1": "Graded circle Tower",
+    //             "cat2": "Graded triangle Tower",
+    //             "cat3": "Graded multi-shape Tower"
+    //         }
+    //     },
+    //     {
+    //         "id" : "9",
+    //         "desc": "piece together",
+    //         "amount": "475",
+    //         "url": "images/27.jpg",
+    //         "subcatigories" : {
+    //             "cat1": "Piece Together - Rectangle",
+    //             "cat2": "Piece Together - triangle"
+    //         }
+    //     }
+    // ];
+    
 
 //--------------------------------------INC/DEC CART QUANTITY---------------------------------------
 
@@ -74,172 +310,13 @@ function cart_itm_count() {
         var curr_cart = local_get('cart') || [];
         curr_cart.push(itm_obj);
         local_set('cart',curr_cart);
+
+        var curr_subcat = local_get('subcat') || [];
+        curr_subcat.push(itm_obj);
+        local_set('subcat',curr_subcat);
+
         cart_itm_count();
     }
-//--------------------------------------FORM VALIDATION---------------------------------------   
-$(document).ready(function() {
-
-$("#validateform").validate({
-          rules:{
-            fname:{
-                required:true,
-              },
-              lname:{
-                required:true,
-              },
-              emailadd: { 
-                  required:true,
-                  email: true 
-               },
-               mobile: { 
-                  required:true,
-                  digits: true,
-                minlength: 10,
-                maxlength: 10 
-               },
-              
-                 
-          },
-
-          messages:{
-            fname:{
-                required:"This field is required",
-              },
-              lname:{
-                required:"This field is required",
-              },
-              emailadd: { 
-              required: "This field is required",
-              email: "Please enter a valid email id",
-              },
-              mobile: { 
-              required: "This field is required",
-              digits: "Please enter a valid mobile number",
-              minlength: "Please enter 10 digits only",
-              maxlength: "Please enter 10 digits only" 
-              },
-               
-
-          }
-      });
-
-
-    var path_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/" : "";
-
-    var items  = [
-    {
-        "id" : "1",
-        "desc": "table with chairs",
-        "amount": "15500",
-        "url": path_pre+"images/1.jpg",
-        "subcatigories" : {
-
-        }
-    },
-    {
-        "id" : "2",
-        "desc": "waterproof mattress",
-        "amount": "4700",
-        "url": "images/5.jpg",
-        "subcatigories" : {
-            
-        }
-    },
-    {
-        "id" : "3",
-        "desc": "selection of balls",
-        "amount": "1770",
-        "url": "images/3.jpg",
-        "subcatigories" : {
-            
-        }
-    },
-    {
-        "id" : "4",
-        "desc": "kitchen set toys",
-        "amount": "1999",
-        "url": "images/4.jpg",
-        "subcatigories" : {
-
-        }
-    },
-    {
-        "id" : "5",
-        "desc": "word builder",
-        "amount": "475",
-        "url": "images/8.jpg",
-        "subcatigories" : {
-            
-        }
-    },
-    {
-        "id" : "6",
-        "desc": "maze chase missing letter",
-        "amount": "575",
-        "url": "images/7.jpg",
-        "subcatigories" : {
-            
-        }
-    },
-
-    {
-        "id" : "7",
-        "desc": "magnetic cutouts",
-        "amount": "425",
-        "url": "images/24.jpg",
-        "subcatigories" : {
-                "cat1": "Capital ABC",
-                "cat2": "Lower abc",
-                "cat3": "Cursive abc"
-        }
-    },
-    {
-        "id" : "8",
-        "desc": "graded tower",
-        "amount": "475",
-        "url": "images/26.jpg",
-        "subcatigories" : {
-            "cat1": "Graded circle Tower",
-            "cat2": "Graded triangle Tower",
-            "cat3": "Graded multi-shape Tower"
-        }
-    },
-    {
-        "id" : "9",
-        "desc": "piece together",
-        "amount": "475",
-        "url": "images/27.jpg",
-        "subcatigories" : {
-            "cat1": "Piece Together - Rectangle",
-            "cat2": "Piece Together - triangle"
-        }
-    }
-    
-];
-
-
-    var item_card = $('.itm:first');
-    $('#item_list').empty();
-    $.each(items, function (k, v) {
-        var itm_card  = item_card.clone();
-        itm_card.attr("item_id",v.id);
-        itm_card.find('.product-image').attr("src",v.url);
-        itm_card.find('.product-text').text(v.desc);
-        itm_card.find('.product-amount').text(v.amount);
-
-        if(Object.keys(v.subcatigories).length){
-            var opts = "";
-            $.each(v.subcatigories, function (k1, v1) {
-                opts += '<option value="'+v1+'">'+v1+'</option>';
-            });
-            itm_card.find('.categ_sel').append(opts);
-        }else{
-            itm_card.find('.categ_sel').remove();
-        }
-
-        $('#item_list').append(itm_card);
-    });
-
 
 //--------------------------------------ADD CART ITEM---------------------------------------
     $('body').on('click', ".add_cart_btn", function() {
@@ -249,8 +326,8 @@ $("#validateform").validate({
         var quantity = 1;
         var item_id = card.attr('item_id');
         var item_img =  card.find('.product-image').attr("src");
-        // console.log(curr_cart);
-        var add_item = {'desc':desc,'price':price,'quantity':quantity,'id':item_id,'img':item_img};
+        var sub_cat =  card.find('.categ_sel').find("option:selected" ).attr("sub_cat_id");
+        var add_item = {'desc':desc,'price':price,'quantity':quantity,'id':item_id,'img':item_img,'subcategory':sub_cat};
         add_item_cart(add_item);
     });
 
@@ -293,26 +370,33 @@ cart_itm_count();
 
 });
 
-
+//--------------------------------------UPDATE/GET CART ITEM---------------------------------------
 function update_cart_page() {
     var item_card = $('.cart-data:first');
     $('#cart-list').empty();
     var getcart = local_get('cart');
-    console.log(getcart);
     // var getitem = getcart.map((k, v) => {
 
 
-        var cart_group_items = {};
-        var cart_total = cart_count = 0;
+    var cart_group_items = {};
+    var cart_total = cart_count = 0;
 
-        $.each(getcart, function (k, v) {
-            cart_group_items[v.id] == undefined ? cart_group_items[v.id] = [] : false;
-            cart_group_items[v.id].push(v);
-            // cart_total += parseFloat(v.price);
-        });
+    $.each(getcart, function (k, v) {
+        cart_group_items[v.id] == undefined ? cart_group_items[v.id] = [] : false;
+        cart_group_items[v.id].push(v);
+        // cart_total += parseFloat(v.price);
+    });
+
+    if(getcart.length == 0){
+        // $('.cart-main').append('<h1>your cart is empty</h1>');
+        $('#cart_empty').css("display","block");
+        $('#cart_section').css("display","none");
+    }else{
+        $('#cart_empty').css("display","none");
+        $('#cart_section').css("display","block");
+    }
 
     $.each(cart_group_items, function (k, i) {
-        // if(getcart != null){
         var v = i[0];
         // console.log(v);
         var itm_card  = item_card.clone();
@@ -324,21 +408,11 @@ function update_cart_page() {
         itm_card.find('.product-total').text(v.price * i.length);
         
         $('#cart-list').append(itm_card);
-            // }else{
-            //     console.log('your cart is empty');
-            // }
     });
-    // (!cart_count) ? $('#cart_empty').append("<h3>Your cart is empty.</h3>"): false
+
 }
 
 
-
-// function cartupdate(){
-//     (local_get('cart') != null) ? cart_count = local_get('cart').length : false;
-
-//     $('.cart_amount,#cart_total,#sub_total,#grand_total').text(cart_total);
-//     $('.cart_count').text(cart_count);
-// }
 
 function local_get(cart) {
     try {
