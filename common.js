@@ -1,4 +1,18 @@
 
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+    spinner.classList.add('show');
+    setTimeout(() => {
+        spinner.classList.remove('show');
+    }, 5000);
+  }
+
+// $(document).ready(function showSpinner(){
+//       $("#test").hide();
+//   });
+
+
 var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/apis/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
 var img_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/images/" : "https://kido-teacher-store.netlify.app/images/";
 
@@ -103,6 +117,7 @@ $(document).ready(function() {
         }
     
         function home_update() {
+            showSpinner();
             var item_card = $('.itm:first');
             $('#item_list').empty();
             var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
@@ -362,6 +377,7 @@ $(document).on('click','.remove-item',function(){
     if (window.confirm("Are you sure you want to delete the item?")) {
     local_set('cart',fin_cart);
     }
+    showSpinner()
     location.reload();
 });
 
@@ -425,3 +441,7 @@ function local_get(cart) {
 }
 // console.log(out);
 function local_set(var_name, value) { localStorage.setItem(var_name, JSON.stringify(value)); }
+
+
+
+
