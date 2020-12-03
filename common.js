@@ -117,6 +117,7 @@ $(document).ready(function() {
         }
     
         function home_update() {
+            showSpinner()
             var item_card = $('.itm:first');
             $('#item_list').empty();
             var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
@@ -132,7 +133,7 @@ $(document).ready(function() {
             });
 
             $.each(items, function (k, v) {
-                showSpinner()
+                
                 var itm_card  = item_card.clone();
                 itm_card.attr("item_id",v.id);
                 itm_card.find('.product-image').attr("src",img_pre+v.url);
