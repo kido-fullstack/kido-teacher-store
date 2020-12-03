@@ -1,16 +1,16 @@
 
 const spinner = document.getElementById("spinner");
+const backgrounghide = document.getElementById("cart-list1");
 
 function showSpinner() {
     spinner.classList.add('show');
+    backgrounghide.classList.add('overlay');
     setTimeout(() => {
         spinner.classList.remove('show');
+        backg.classList.remove('overlay');
     }, 5000);
   }
 
-// $(document).ready(function showSpinner(){
-//       $("#test").hide();
-//   });
 
 
 var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/apis/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
@@ -117,7 +117,6 @@ $(document).ready(function() {
         }
     
         function home_update() {
-            showSpinner();
             var item_card = $('.itm:first');
             $('#item_list').empty();
             var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
@@ -133,6 +132,7 @@ $(document).ready(function() {
             });
 
             $.each(items, function (k, v) {
+                showSpinner()
                 var itm_card  = item_card.clone();
                 itm_card.attr("item_id",v.id);
                 itm_card.find('.product-image').attr("src",img_pre+v.url);

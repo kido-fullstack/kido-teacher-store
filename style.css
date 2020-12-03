@@ -212,11 +212,11 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     height: 80px;
   
     border: 2px solid #f3f3f3;
-    border-top:3px solid #000;
+    border-top:3px solid #063268;
     border-radius: 100%;
   
     position: absolute;
-    top:50;
+    top:0;
     bottom:0;
     left:0;
     right: 0;
@@ -237,6 +237,13 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     visibility: visible;
   }
 
+  #cart-list1{
+    visibility: visible;
+  }
+
+  #cart-list1.overlay {
+    visibility: hidden;
+  }
 
 
 /* Medium devices (landscape tablets, 768px and up) */
