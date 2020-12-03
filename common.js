@@ -8,7 +8,7 @@ function showSpinner() {
     setTimeout(() => {
         spinner.classList.remove('show');
         backgrounghide.classList.remove('overlay');
-    }, 5000);
+    }, 500);
   }
 
 
