@@ -25,51 +25,22 @@ function topFunction() {
 //--------------------------------------FORM VALIDATION---------------------------------------   
 $(document).ready(function() {
 
-    $("#validateform").validate({
+    $("#validatecart").validate({
               rules:{
-                fname:{
+                catsel:{
                     required:true,
-                  },
-                  lname:{
-                    required:true,
-                  },
-                  emailadd: { 
-                      required:true,
-                      email: true 
-                   },
-                   mobile: { 
-                      required:true,
-                      digits: true,
-                    minlength: 10,
-                    maxlength: 10 
-                   },
-                  
-                     
+                  },             
               },
     
               messages:{
-                fname:{
+                catsel:{
                     required:"This field is required",
                   },
-                  lname:{
-                    required:"This field is required",
-                  },
-                  emailadd: { 
-                  required: "This field is required",
-                  email: "Please enter a valid email id",
-                  },
-                  mobile: { 
-                  required: "This field is required",
-                  digits: "Please enter a valid mobile number",
-                  minlength: "Please enter 10 digits only",
-                  maxlength: "Please enter 10 digits only" 
-                  },
-                   
-    
               }
           });
 
          
+ //--------------------------------------USER AUTHENTICATION---------------------------------------  
 
           if(!local_get('user')){
             $('#exampleModal').modal({
@@ -87,7 +58,6 @@ $(document).ready(function() {
 
           $(document).on('click','.logout',function(){
             localStorage.removeItem("user");
-            // location.reload();
             window.location.replace("index.html");
           });
 
@@ -97,7 +67,6 @@ $(document).ready(function() {
               console.log(email_add);
             // var user_auth =  JSON.parse(requester("http://localhost/apis/api.php","POST",{'api':'auth_user'}));
             var user_auth =  JSON.parse(requester(server,"POST",{'api':'auth_user','filter':'{"email":"'+email_add+'","is_active":1}'}));
-            // console.log(user_auth);
             if(user_auth.status){
                 local_set('user',user_auth.user);
                 var logged_email = user_auth.user[0]["email"];
@@ -289,9 +258,14 @@ $(document).ready(function() {
         var price = parseFloat(card.find('.product-price').text());
         var quantity = 1;
         var item_id = card.attr('item_id');
-        var item_img =  card.find('.product-img').attr("src");
-
+        var subcat_id = card.attr('subcat_id');
+        var sub_cat = card.find('.product-subcat').text();
+        var item_img = card.find('.product-img').attr("src");
         var add_item = {'desc':desc,'price':price,'quantity':quantity,'id':item_id,'img':item_img};
+
+        sub_cat.length ? add_item['sub_cat_name'] = sub_cat : false;
+        sub_cat.length ? add_item['subcategory'] = subcat_id : false;
+
         add_item_cart(add_item);
         update_cart_page();
     });
@@ -315,17 +289,13 @@ function cart_itm_count() {
 }    
    
 
-    function add_item_cart(itm_obj) {
-        var curr_cart = local_get('cart') || [];
-        curr_cart.push(itm_obj);
-        local_set('cart',curr_cart);
-
-        var curr_subcat = local_get('subcat') || [];
-        curr_subcat.push(itm_obj);
-        local_set('subcat',curr_subcat);
-
-        cart_itm_count();
-    }
+function add_item_cart(itm_obj) {
+    var curr_cart = local_get('cart') || [];
+    curr_cart.push(itm_obj);
+    local_set('cart',curr_cart);
+    
+    cart_itm_count();
+}
 
 //--------------------------------------ADD CART ITEM---------------------------------------
     $('body').on('click', ".add_cart_btn", function() {
@@ -336,23 +306,34 @@ function cart_itm_count() {
         var item_id = card.attr('item_id');
         var item_img =  card.find('.product-image').attr("src");
         var sub_cat =  card.find('.categ_sel').find("option:selected" ).attr("sub_cat_id");
-        var add_item = {'desc':desc,'price':price,'quantity':quantity,'id':item_id,'img':item_img,'subcategory':sub_cat};
+        var add_item = {'desc':desc,'price':price,'quantity':quantity,'id':item_id,'img':item_img,'subcategory':sub_cat,'sub_cat_name':card.find('.categ_sel').val()};
         add_item_cart(add_item);
     });
-
 
     
 //--------------------------------------REDUCE CART ITEM---------------------------------------
 $(document).on('click','.qtyminus',function(prod_id){
     var card = $(this).closest('.cart-data');
     var prod_id = card.attr('item_id');
+    var prod_cat_id = card.attr('subcat_id');
+    console.log(prod_cat_id);
         var curr_cart = local_get('cart') || [];
         $.each(curr_cart, function (k, v) {
-            if(parseInt(v.id) == parseInt(prod_id)){
-                curr_cart.splice(k, 1);
-                local_set('cart',curr_cart);
-                return false;
+           
+            if(v.subcategory == undefined){
+                if(parseInt(v.id) == parseInt(prod_id)){
+                    curr_cart.splice(k, 1);
+                    local_set('cart',curr_cart);
+                    return false;
+                }
+            }else{
+                if(parseInt(v.subcategory) == parseInt(prod_cat_id) && parseInt(v.id) == parseInt(prod_id)){
+                    curr_cart.splice(k, 1);
+                    local_set('cart',curr_cart);
+                    return false;
+                }
             }
+        
         });
         update_cart_page();
         cart_itm_count();
@@ -362,12 +343,21 @@ $(document).on('click','.qtyminus',function(prod_id){
 $(document).on('click','.remove-item',function(){
     var card = $(this).closest('.cart-data');
     var prod_id = card.attr('item_id');
+    var prod_cat_id = card.attr('subcat_id');
     var curr_cart = local_get('cart') || [];
     var fin_cart = [];
     $.each(curr_cart, function (k, v) {
-        if(parseInt(v.id) != parseInt(prod_id)){
-            fin_cart.push(v);
+
+        if(v.subcategory == undefined){
+            if(parseInt(v.id) != parseInt(prod_id)){
+                fin_cart.push(v);
+            }
+        }else{
+            if(parseInt(v.subcategory) != parseInt(prod_cat_id) || parseInt(v.id) != parseInt(prod_id)){
+                fin_cart.push(v);
+            }
         }
+        
     });
     if (window.confirm("Are you sure you want to delete the item?")) {
     local_set('cart',fin_cart);
@@ -391,8 +381,8 @@ function update_cart_page() {
     var cart_total = cart_count = 0;
 
     $.each(getcart, function (k, v) {
-        cart_group_items[v.id] == undefined ? cart_group_items[v.id] = [] : false;
-        cart_group_items[v.id].push(v);
+        cart_group_items[v.id+v.subcategory] == undefined ? cart_group_items[v.id+v.subcategory] = [] : false;
+        cart_group_items[v.id+v.subcategory].push(v);
         // cart_total += parseFloat(v.price);
     });
 
@@ -407,15 +397,17 @@ function update_cart_page() {
 
     $.each(cart_group_items, function (k, i) {
         var v = i[0];
-        // console.log(v);
+        // console.log(v.sub_cat_name);
         var itm_card  = item_card.clone();
         itm_card.attr("item_id",v.id);
+        itm_card.attr("subcat_id",v.subcategory);
         itm_card.find('.product-img').attr("src",v.img);
         itm_card.find('.product-title').text(v.desc);
         itm_card.find('.qty').val(i.length);
         itm_card.find('.product-price').text(v.price);
+        var sub_cat = (v.sub_cat_name != undefined) ? v.sub_cat_name : "";
+        itm_card.find('.product-subcat').text(sub_cat);
         itm_card.find('.product-total').text(v.price * i.length);
-        
         $('#cart-list').append(itm_card);
     });
 
