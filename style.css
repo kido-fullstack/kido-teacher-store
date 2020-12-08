@@ -20,7 +20,7 @@ h3, .h3 {font-size: 1.15em;}
 h4, .h4 {font-size: 1.1em;}
 h5, h6, .h5, .h6{font-size: 1.2em; }
 
-p,li {color: #fff; font-size: 1.2em; text-transform: capitalize;}
+p,li {color: #000; font-size: 95%; font-weight: 400; display: contents;}
 a {color: #444; text-decoration: none;  transition: 0.3s;}
 
 #myBtn {
@@ -86,7 +86,7 @@ header .fas span.cart-count {
     font-size: 16px;
 }
 
-.nav-link{color: #fff!important; font-size: 0.8em; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 600;}
+.nav-link{color: #fff!important; font-size: 1.0em; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 600;}
 .bg-color{background: #063268!important; }
   
 .logout{

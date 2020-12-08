@@ -133,12 +133,11 @@ $(document).ready(function() {
             });
 
             $.each(items, function (k, v) {
-                
                 var itm_card  = item_card.clone();
                 itm_card.attr("item_id",v.id);
                 itm_card.find('.product-image').attr("src",img_pre+v.url);
                 itm_card.find('.product-text').text(v.desc);
-                itm_card.find('.product-desc').text(v.longdesc);
+                itm_card.find('.product-desc').html(v.longdesc).text();
                 itm_card.find('.product-amount').text(v.amount);
         
                 if(Object.keys(v.subcatigories).length){
@@ -152,6 +151,7 @@ $(document).ready(function() {
                 }
                 $('#item_list').append(itm_card);
             });
+            
         }
     
         // console.log(items);
