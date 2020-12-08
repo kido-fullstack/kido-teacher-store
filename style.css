@@ -245,7 +245,9 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     visibility: hidden;
   }
 
-
+  .product-data{
+    height: 500px;
+  }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .visible-xs {
