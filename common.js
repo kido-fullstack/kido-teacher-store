@@ -117,9 +117,10 @@ $(document).ready(function() {
         }
     
         function home_update() {
-            showSpinner()
+            
             var item_card = $('.itm:first');
             $('#item_list').empty();
+            showSpinner()
             var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
             console.log(all_items);
             var items = {};
