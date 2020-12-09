@@ -249,7 +249,7 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     height: 450px;
   }
 
-  .product-data .product-data-list{
+  /* .product-data .product-data-list{
     position: relative;
     overflow: hidden;
 }
@@ -304,7 +304,7 @@ a.text-info:hover {
 
 .decor{
     color: #fff;
-}
+} */
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
