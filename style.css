@@ -245,7 +245,7 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     visibility: hidden;
   }
 
-  .product-data{
+  .product-data-list{
     height: 450px;
   }
 
@@ -268,10 +268,7 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     transition: all 0.4s ease-in-out 0s;
 }
 .product-data:hover .product-data-list .p-img:before{ opacity: 1; }
-.product-data .product-data-list img{
-    width: 100%;
-    height: auto;
-}
+
 .product-data-list .pic-1{
     backface-visibility: hidden;
     transition: all 0.5s;
