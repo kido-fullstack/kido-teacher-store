@@ -134,7 +134,7 @@ $(document).ready(function() {
             });
 
             $.each(items, function (k, v) {
-                showSpinner()
+                showSpinner()   
                 var itm_card  = item_card.clone();
                 itm_card.attr("item_id",v.id);
                 itm_card.find('.product-image').attr("src",img_pre+v.url);
@@ -447,4 +447,12 @@ function local_set(var_name, value) { localStorage.setItem(var_name, JSON.string
 
 
 
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#item_list .itm").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
 
