@@ -249,6 +249,11 @@ input.qtyminus { width:25px; height:30px; background-color:#063268 ; color: #fff
     height: 450px;
   }
 
+  .p-model{
+      cursor: pointer;
+  }
+
+
   /* .product-data .product-data-list{
     position: relative;
     overflow: hidden;
