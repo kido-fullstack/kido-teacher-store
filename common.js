@@ -141,6 +141,8 @@ $(document).ready(function() {
                 itm_card.find('.product-text').text(v.desc);
                 itm_card.find('.product-desc').html(v.longdesc).text();
                 itm_card.find('.product-amount').text(v.amount);
+                // itm_card.find('.pinfo').attr("item_id",v.id);
+                // itm_card.find('.pdata').attr("item_id",v.id);
         
                 if(Object.keys(v.subcatigories).length){
                     var opts = "";
@@ -155,6 +157,24 @@ $(document).ready(function() {
             });
             
         }
+
+        $(document).on('click','.p-model',function(){
+
+            var model_item_card = $(this).closest('.itm');
+        
+            var item_id  = model_item_card.attr("item_id");
+            var product_image = model_item_card.find('.product-image').attr("src");
+            var product_text = model_item_card.find('.product-text').text();
+            var product_desc = model_item_card.find('.product-desc').text();
+            var product_amount = model_item_card.find('.product-amount').text();
+            console.log(product_desc);
+
+            $('#model_item_list').attr("item_id", item_id);
+            $('#model_item_list').find('.product-image').attr("src",product_image);
+            $('#model_item_list').find('.product-text').text(product_text);
+            $('#model_item_list').find('.product-desc').text(product_desc);
+            $('#model_item_list').find('.product-amount').text(product_amount);
+        });
     
         // console.log(items);
     

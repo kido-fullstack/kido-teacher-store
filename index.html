@@ -5,7 +5,7 @@
     <title>Kido-Teacher-Store</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> 
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -45,7 +45,7 @@
 
   <!-- Modal -->
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <!-- <div id="modal" class="modal hide fade in" data-keyboard="false" data-backdrop="static"> -->
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -79,62 +79,73 @@
   <section class="user-detail pt-5 pb-5" id="cart-list1">
       <div class="container">
           <div class="row justify-content-center">
-            <div id="spinner"></div> 
+            <div id="spinner"></div>
               <div class="col-lg-12 border rounded shadow bg-white p-5">
                   <h2>Product List</h2>
                   <input id="myInput" class="form-control" type="text" placeholder="Search..">
                    <!-- <form id="validatecart"> -->
-                  <div class="row" id="item_list">
+                    <div class="row" id="item_list">
                       <div class="col-lg-4 mt-3 itm">
-                        <div class="checkbox-animate">
-                            <div class="product-data text-center border shadow rounded p-4">
-                               
-                              <img src="images/1.jpg" class="product-image img-fluid" alt="picture1">
-                              <h6 class=" text-primary pt-3"><span>&#8377;</span><span class="product-amount">15500</span></h6>
-                              <h4 class="product-text py-2">Table with chairs</h4>
-                              <small class="product-desc py-2">one table with four chairs available</small>
-                              <div class="choose-data py-2">
-                                <select class="form-control categ_sel" name="catsel" id="catsel" required>
-                                    <option value="">Choose...</option>
-                                </select>
+                          <div class="product-data">
+                              <div class="product-data-list text-center border shadow rounded p-4">
+                                  <div class=" p-img">
+                                      <img src="images/1.jpg" class="product-image img-fluid" alt="picture1">
+                                  </div>
+                                  <h6 class="text-primary pt-3"><span>&#8377;</span><span class="product-amount">15500</span></h6>
+                                  <h4 class="product-text py-2">Table with chairs</h4>
+                                  <small class="product-desc d-none">one table with four chairs available</small>
+                                  <div class="choose-data py-2">
+                                    <select class="form-control categ_sel" name="catsel" id="catsel" required>
+                                        <option value="">Choose...</option>
+                                    </select>
+                                  </div>
+                                  <button  class="btn btn-primary text-white btn-sm add_cart_btn">Add to Cart</button>
+                                  <div class="view-product">
+                                      <a class="p-model text-info" data-toggle="modal" data-target="#exampleModal1">
+                                        <h4 class="decor"><strong>View Product Details</strong></h4>
+                                        <i class="fas fa-eye fa-4x"></i>
+                                      </a>
+                                  </div>
                               </div>
-                              <button  class="btn btn-primary text-white btn-sm add_cart_btn">Add to Cart</button>
-                              <!-- <span className="text-info" data-toggle="modal" data-target="#exampleModal1"><i class="fas fa-info-circle fa-1x"></i></span> -->
-                            </div>
                           </div>
+                      </div>
+                    </div>
+                <!-- </form> -->
 
-                          <!-- <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title product-text" id="exampleModalLabel">Table with chairs</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div className="row">
-                                        <div class="col-lg-12"><div class="modal-img pb-3">  <img src="images/1.jpg" class="product-image img-fluid" alt="picture1"></div>
-                                
-                                             <small class="product-desc py-2">one table with four chairs available</small>
-                                
+                <div id="model_item_list">
+                  <div class="model_itm">
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title product-text" id="exampleModalLabel">Table with chairs</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div className="row">
+                                    <div class="col-lg-12">
+                                        <div class="modal-img pb-3">
+                                          <img src="images/1.jpg" class="product-image img-fluid" alt="picture1">
                                         </div>
+                                        <small class="product-desc py-2">available</small>
+                                        <h6 class="text-primary pt-3"><span>&#8377;</span><span class="product-amount">15500</span></h6>
                                     </div>
                                 </div>
-                                </div>
                             </div>
-                            </div> -->
-                            
+                          </div>
+                        </div>
                       </div>
-              </div>
-                <!-- </form> -->
+                    </div>
+                  </div>
           </div>
       </div>
   </section>
 
     <!-- footer start -->
     <footer>
-       
+
     </footer>
     <!-- footer end -->
 
