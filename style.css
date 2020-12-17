@@ -23,6 +23,10 @@ h5, h6, .h5, .h6{font-size: 1.2em; }
 p,li {color: #000; font-size: 95%; font-weight: 400; display: contents;}
 a {color: #444; text-decoration: none;  transition: 0.3s;}
 
+.product-desc div{
+    line-height: 3vh;
+
+}
 #myBtn {
     display: none;
     position: fixed;

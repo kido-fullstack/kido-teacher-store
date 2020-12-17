@@ -122,7 +122,7 @@ $(document).ready(function() {
             $('#item_list').empty();
     
             var all_items =  JSON.parse(requester(server,"POST",{'api':'get_items'}));
-            console.log(all_items);
+            // console.log(all_items);
             var items = {};
             $.each(all_items, function (k, v) {
         
@@ -137,6 +137,11 @@ $(document).ready(function() {
                 showSpinner()   
                 var itm_card  = item_card.clone();
                 itm_card.attr("item_id",v.id);
+                itm_card.attr("min_age",v.min_age);
+                itm_card.attr("max_age",v.max_age);
+                itm_card.attr("material",v.material);
+                itm_card.attr("colour",v.colour);
+                itm_card.attr("weight",v.weight);
                 itm_card.find('.product-image').attr("src",img_pre+v.url);
                 itm_card.find('.product-text').text(v.desc);
                 itm_card.find('.product-desc').html(v.longdesc).text();
@@ -161,114 +166,45 @@ $(document).ready(function() {
         $(document).on('click','.p-model',function(){
 
             var model_item_card = $(this).closest('.itm');
-        
-            var item_id  = model_item_card.attr("item_id");
+            var min_age = model_item_card.attr("min_age");
+            var max_age = model_item_card.attr("max_age");
+
+            var material = model_item_card.attr("material");
+            var colour = model_item_card.attr("colour");
+            var weight = model_item_card.attr("weight");
+
+            // var item_id  = model_item_card.attr("item_id");
             var product_image = model_item_card.find('.product-image').attr("src");
             var product_text = model_item_card.find('.product-text').text();
             var product_desc = model_item_card.find('.product-desc').text();
             var product_amount = model_item_card.find('.product-amount').text();
+            
+            // model_item_card.attr("max_age")
+            parseInt(min_age) > 0 ? product_desc += " <div> <b> Min age </b>:  "+(min_age/12).toFixed(1)+" years</div> " : false;
+            parseInt(max_age) > 0 ? product_desc += " <div> <b> Max age </b>:  "+(max_age/12).toFixed(1)+" years</div> " : false;
+            (material).length ? product_desc += " <div><b> Material </b>: "+ material +"</div> " : false;
+            (colour).length ? product_desc += " <div><b> Colour </b>: "+ colour +"</div> " : false;
+            (weight).length ? product_desc += " <div><b> Weight </b>: "+ (weight / 1000).toFixed(2) +"</div> " : false;
+
+            // itm_card.attr("material",v.material);
+            // itm_card.attr("colour",v.colour);
+            // itm_card.attr("weight",v.weight);
+
+
+            // if(parseInt(min_age) > 0){
+            //     product_desc+" Min age: "+min_age ;
+            // }
+
             console.log(product_desc);
 
-            $('#model_item_list').attr("item_id", item_id);
+            // $('#model_item_list').attr("item_id", item_id);
             $('#model_item_list').find('.product-image').attr("src",product_image);
             $('#model_item_list').find('.product-text').text(product_text);
-            $('#model_item_list').find('.product-desc').text(product_desc);
+            $('#model_item_list').find('.product-desc').html(product_desc);
             $('#model_item_list').find('.product-amount').text(product_amount);
+
+
         });
-    
-        // console.log(items);
-    
-    //     var path_pre = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/kido-teacher-store/" : "";
-    
-    //     var items  = [
-    //     {
-    //         "id" : "1",
-    //         "desc": "table with chairs",
-    //         "amount": "15500",
-    //         "url": path_pre+"images/1.jpg",
-    //         "subcatigories" : {
-    
-    //         }
-    //     },
-    //     {
-    //         "id" : "2",
-    //         "desc": "waterproof mattress",
-    //         "amount": "4700",
-    //         "url": "images/5.jpg",
-    //         "subcatigories" : {
-                
-    //         }
-    //     },
-    //     {
-    //         "id" : "3",
-    //         "desc": "selection of balls",
-    //         "amount": "1770",
-    //         "url": "images/3.jpg",
-    //         "subcatigories" : {
-                
-    //         }
-    //     },
-    //     {
-    //         "id" : "4",
-    //         "desc": "kitchen set toys",
-    //         "amount": "1999",
-    //         "url": "images/4.jpg",
-    //         "subcatigories" : {
-    
-    //         }
-    //     },
-    //     {
-    //         "id" : "5",
-    //         "desc": "word builder",
-    //         "amount": "475",
-    //         "url": "images/8.jpg",
-    //         "subcatigories" : {
-                
-    //         }
-    //     },
-    //     {
-    //         "id" : "6",
-    //         "desc": "maze chase missing letter",
-    //         "amount": "575",
-    //         "url": "images/7.jpg",
-    //         "subcatigories" : {
-                
-    //         }
-    //     },
-    
-    //     {
-    //         "id" : "7",
-    //         "desc": "magnetic cutouts",
-    //         "amount": "425",
-    //         "url": "images/24.jpg",
-    //         "subcatigories" : {
-    //                 "cat1": "Capital ABC",
-    //                 "cat2": "Lower abc",
-    //                 "cat3": "Cursive abc"
-    //         }
-    //     },
-    //     {
-    //         "id" : "8",
-    //         "desc": "graded tower",
-    //         "amount": "475",
-    //         "url": "images/26.jpg",
-    //         "subcatigories" : {
-    //             "cat1": "Graded circle Tower",
-    //             "cat2": "Graded triangle Tower",
-    //             "cat3": "Graded multi-shape Tower"
-    //         }
-    //     },
-    //     {
-    //         "id" : "9",
-    //         "desc": "piece together",
-    //         "amount": "475",
-    //         "url": "images/27.jpg",
-    //         "subcatigories" : {
-    //             "cat1": "Piece Together - Rectangle",
-    //             "cat2": "Piece Together - triangle"
-    //         }
-    //     }
-    // ];
     
 
 //--------------------------------------INC/DEC CART QUANTITY---------------------------------------
