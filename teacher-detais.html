@@ -250,7 +250,8 @@ $(function () {
         "contentType": false,
         "data": form,
         success: function (response) {
-            window.location = "thankyou-msg.html"
+            // window.location = "thankyou-msg.html"
+            alert("completed");
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
