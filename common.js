@@ -78,7 +78,6 @@ $(document).ready(function() {
 
           $(document).on('click','.btn-auth',function(){
               var email_add = $('.mymail').val();
-              console.log(email_add);
             // var user_auth =  JSON.parse(requester("http://localhost/apis/api.php","POST",{'api':'auth_user'}));
             var user_auth =  JSON.parse(requester(server,"POST",{'api':'auth_user','filter':'{"email":"'+email_add+'","is_active":1}'}));
             if(user_auth.status){

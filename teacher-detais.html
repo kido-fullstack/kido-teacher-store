@@ -44,8 +44,6 @@
 
     </header>
 
-
-
   <section class="teacher-details py-5" id="cart-list1">
       <div class="container">
         <div id="spinner"></div>
@@ -53,7 +51,7 @@
                 <div class="col-lg-12">
                     <div class="border bg-white p-5">
                         <h2 class="t-text pb-3">Profile Details</h2>
-                    <form>
+                    <form id="validate" enctype="multipart/form-data">        
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name">
@@ -63,41 +61,41 @@
                             <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter Description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="adhar-img">Adhar Card Image <small class="text-warning">Note: image should be in png or jpg</small></label>
+                            <label for="adhar_img">Adhar Card Image <small class="text-warning">Note: image should be in png or jpg</small></label>
                             <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="adhar-img" id="adhar-img">
-                            <label class="custom-file-label" for="adhar-img">Upload Adhar Card</label>
+                            <input type="file" class="custom-file-input" name="adhar_img" id="adhar_img">
+                            <label class="custom-file-label" for="adhar_img">Upload Adhar Card</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="cv-file">CV File <small class="text-warning">Note: file should be in Pdf</small></label>
+                            <label for="cv_file">CV File <small class="text-warning">Note: file should be in Pdf</small></label>
                             <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="cv-file" id="cv-file">
-                            <label class="custom-file-label" for="cv-file">Upload CV</label>
+                            <input type="file" class="custom-file-input" name="cv_file" id="cv_file">
+                            <label class="custom-file-label" for="cv_file">Upload CV</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="pod1-img">POD Image1 <small class="text-warning">Note: image should be in png or jpg</small></label>
+                            <label for="pod_img1">POD Image1 <small class="text-warning">Note: image should be in png or jpg</small></label>
                             <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="pod1-img" id="pod1-img">
-                            <label class="custom-file-label" for="pod1-img">Upload PDO Image1</label>
+                            <input type="file" class="custom-file-input" name="pod_img1" id="pod_img1">
+                            <label class="custom-file-label" for="pod_img1">Upload PDO Image1</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="pod2-img">POD Image2 <small class="text-warning">Note: image should be in png or jpg</small></label>
+                            <label for="pod_img2">POD Image2 <small class="text-warning">Note: image should be in png or jpg</small></label>
                             <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="pod2-img" id="pod2-img">
-                            <label class="custom-file-label" for="pod2-img">Upload PDO Image2</label>
+                            <input type="file" class="custom-file-input" name="pod_img2" id="pod_img2">
+                            <label class="custom-file-label" for="pod_img2">Upload PDO Image2</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="pod3-img">POD Image3 <small class="text-warning">Note: image should be in png or jpg</small></label>
+                            <label for="pod_img3">POD Image3 <small class="text-warning">Note: image should be in png or jpg</small></label>
                             <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="pod3-img" id="pod3-img">
-                            <label class="custom-file-label" for="pod3-img">Upload PDO Image3</label>
+                            <input type="file" class="custom-file-input" name="pod_img3" id="pod_img3">
+                            <label class="custom-file-label" for="pod_img3">Upload PDO Image3</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="form_submit" class="btn btn-primary">Submit</button>
                       </form>
                     </div>
                 </div>
@@ -121,6 +119,153 @@
   <script src="https://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
   <script src="common.js"></script>
  <script>
+     $(document).ready(function() {
+
+        $("#validate").validate({
+                rules:{
+                    name:{
+                        required:true,
+                    }, 
+                    description:{
+                        required:true,
+                    },               
+                    adhar_img:{
+                        required:true,
+                        extension: "png|jpg"
+                    },   
+                    cv_file:{
+                        required:true,
+                        extension: "pdf|doc"
+                    },  
+                    pod_img1:{
+                        extension: "png|jpg",
+                    },   
+                    pod_img2:{
+                        extension: "png|jpg",
+                    }, 
+                    pod_img3:{
+                        extension: "png|jpg",
+                    },
+                },
+
+                messages:{
+                    name:{
+                        required:"This field is required",
+                    },
+                    description:{
+                        required:"This field is required",
+                    },
+                    adhar_img:{
+                        required:"This field is required",
+                        extension:"Please enter a image with png or jpg extension"
+                    },
+                    cv_file:{
+                        required:"This field is required",
+                        extension:"Please enter a image with pdf extension"
+                    },
+                    pod_img1:{
+                        extension:"Please enter a image with png or jpg extension",
+                    },
+                    pod_img2:{
+                        extension:"Please enter a image with png or jpg extension",
+                    },
+                    pod_img3:{
+                        extension:"Please enter a image with png or jpg extension",
+                    },
+                }
+        });
+
+        $('#adhar_img').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                var current_path = fileName.split("\\").pop();
+                $(this).next('.custom-file-label').html(current_path);
+            })
+
+            $('#cv_file').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                var current_path = fileName.split("\\").pop();
+                $(this).next('.custom-file-label').html(current_path);
+            })
+
+            $('#pod_img1').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                var current_path = fileName.split("\\").pop();
+                $(this).next('.custom-file-label').html(current_path);
+            })
+
+            $('#pod_img2').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                var current_path = fileName.split("\\").pop();
+                $(this).next('.custom-file-label').html(current_path);
+            })
+
+            $('#pod_img3').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                var current_path = fileName.split("\\").pop();
+                $(this).next('.custom-file-label').html(current_path);
+            })
+
+    });
+
+
+var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/apis/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
+    // On Load
+$(function () {
+    'use strict';
+    
+    $('#form_submit').on('click', function (event) {
+        var data;
+        
+        event.stopPropagation();
+        event.preventDefault();
+        var form = new FormData();
+        form.append("api", "upload_file");
+        $("#adhar_img")[0].files.length ? form.append("adhar_img", $("#adhar_img")[0].files[0]) : false;
+        $("#cv_file")[0].files.length ? form.append("cv_file", $("#cv_file")[0].files[0]) : false;
+        $("#pod_img1")[0].files.length ? form.append("pod_img1", $("#pod_img1")[0].files[0]) : false;
+        $("#pod_img2")[0].files.length ? form.append("pod_img2", $("#pod_img2")[0].files[0]) : false;
+        $("#pod_img3")[0].files.length ? form.append("pod_img3", $("#pod_img3")[0].files[0]) : false;
+        form.append("id", "1");
+        form.append("name", $("#name").val());
+        form.append("description", $("#description").val());
+        var user = local_get('user');
+        form.append("email", user[0].email);
+
+        var settings = {
+        "url": server,
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form,
+        success: function (response) {
+            window.location = "thankyou-msg.html"
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+        };
+
+        $.ajax(settings);
+
+    });
+    
+});
+
+
+
 </script>
  </body>
 
