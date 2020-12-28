@@ -218,9 +218,9 @@
     });
 
 
-var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/api-kido-teacher-store/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
+var server = ((document.location.host).indexOf("localhost") !== -1) ? "http://localhost/apis/api.php" : "https://shop.kidovillage.com/kvshop_api/api.php";
     // On Load
-$(function () {
+    $(function () {
     'use strict';
     
     $('#form_submit').on('click', function (event) {
@@ -235,10 +235,10 @@ $(function () {
         $("#pod_img1")[0].files.length ? form.append("pod_img1", $("#pod_img1")[0].files[0]) : false;
         $("#pod_img2")[0].files.length ? form.append("pod_img2", $("#pod_img2")[0].files[0]) : false;
         $("#pod_img3")[0].files.length ? form.append("pod_img3", $("#pod_img3")[0].files[0]) : false;
-        form.append("id", "1");
+        var user = local_get('user');
+        form.append("id", user[0].id);
         form.append("name", $("#name").val());
         form.append("description", $("#description").val());
-        var user = local_get('user');
         form.append("email", user[0].email);
 
         var settings = {
@@ -250,8 +250,8 @@ $(function () {
         "contentType": false,
         "data": form,
         success: function (response) {
-            // window.location = "thankyou-msg.html"
-            alert("completed");
+            window.location = "thankyou-msg.html";
+            // alert("completed");
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
@@ -264,6 +264,8 @@ $(function () {
     });
     
 });
+
+
 
 
 
